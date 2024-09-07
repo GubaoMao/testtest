@@ -1,0 +1,1065 @@
+<!-- The code author is Dr. Mao -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+
+
+
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>风险预测模型</title>
+		<!--	<style type="text/css">
+					
+					charset=gb2312
+					.STYLE3 {
+									color: #0000FF;
+									font-size: 36px;
+									font-family: "华光小标宋_CNKI";
+								}
+													.STYLE4 {
+									font-size: 36px;
+									color: #0000FF;
+								}
+					
+				</style>
+			-->
+
+		<!-- very important -->
+		<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css" />
+		<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="jquery.form.js"></script>
+		<script type="text/javascript" src="jquery.js"></script>
+
+		<!--  
+		   <link rel="stylesheet" href="jqueryui/style.css" />  net::ERR_ABORTED 404 (Not Found) -->
+
+
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			< !-- canvas {
+				background: url(images/snow.jpg) no-repeat;
+				background-size: 100% 100%;
+				overflow: hidden;
+			}
+
+			-->canvas {
+				background: no-repeat;
+				background-size: 100% 100%;
+				overflow: hidden;
+			}
+		</style>
+
+		<style>
+			.button1 {
+				-webkit-transition-duration: 0.4s;
+				transition-duration: 0.4s;
+				padding: 20px 36px;
+				text-align: center;
+				font-size: 26px;
+				background-color: #FFFF00;
+				color: balck;
+				border: 2px solid #4caf50;
+				border-radius: 8px;
+
+			}
+
+			.button1:hover {
+				background-color: #4caf50;
+				color: #FFFF00;
+			}
+		</style>
+
+		<!--
+	      <style type="text/css">
+
+.STYLE5 {font-family: "华光小标宋_CNKI"}
+.STYLE6 {
+	font-family: "华光楷体_CNKI";
+	font-size: 18px;
+	font-weight: bold;
+	color: #0000FF;
+}
+.STYLE7 {font-size: 24px}
+
+          </style>
+		  -->
+
+		<style type="text/css">
+			<!--
+			.STYLE4 {
+				font-family: "华光楷体_CNKI";
+				font-size: 36px;
+				color: #0000FF;
+			}
+
+			.STYLE10 {
+				font-family: "宋体";
+				font-size: 48px;
+				color: #00CC33;
+				font-weight: bold;
+			}
+
+			body {
+				background-color: #FFFFFF;
+			}
+
+			.STYLE11 {
+				color: black;
+			}
+
+			.STYLE14 {
+				font-size: 24;
+				color: #00CC33;
+			}
+
+			.STYLE23 {
+				font-size: 20px
+			}
+
+			.STYLE24 {
+				font-size: 20px;
+				color: black;
+				font-family: "华光楷体_CNKI";
+			}
+
+			.STYLE25 {
+				color: black;
+				font-size: 20px;
+			}
+
+			.STYLE26 {
+				color: black;
+				font-family: "华光小标宋_CNKI";
+			}
+
+			.STYLE27 {
+				color: #0066FF
+			}
+			-->
+		</style>
+	</head>
+
+	<body>
+
+		<div align="right">
+			/* <script type="text/javascript">
+				window.onload = function() {
+					//屏蔽键盘事件
+					document.onkeydown = function() {
+						var e = window.event || arguments[0];
+						//F12
+						if (e.keyCode == 123) {
+							return false;
+							//Ctrl+Shift+I
+						} else if ((e.ctrlKey) && (e.shiftKey) && (e.keyCode == 73)) {
+							return false;
+							//Shift+F10
+						} else if ((e.shiftKey) && (e.keyCode == 121)) {
+							return false;
+							//Ctrl+U
+						} else if ((e.ctrlKey) && (e.keyCode == 85)) {
+							return false;
+						}
+					};
+					//屏蔽鼠标右键
+					document.oncontextmenu = function() {
+						return false;
+					}
+				}
+			</script> */
+
+
+			<!--时间 和顶部链接 start-->
+
+		</div>
+		<div class="top1box">
+			<div class="top1box_c">
+				<div align="center"><span>
+						<script language="JavaScript">
+							<!--
+							var newDate = new Date();
+							var year = newDate.getFullYear();
+							var month = newDate.getMonth() + 1;
+							var day = newDate.getDate();
+							var date = newDate.getDay();
+							var hour = newDate.getHours() //获取小时
+							var minute = newDate.getMinutes() //获取分钟
+							var second = newDate.getSeconds() //获取秒
+							var dd = "";
+							if (date == 0)
+								dd = "星期日";
+							else if (date == 1)
+								dd = "星期一";
+							else if (date == 2)
+								dd = "星期二";
+							else if (date == 3)
+								dd = "星期三";
+							else if (date == 4)
+								dd = "星期四";
+							else if (date == 5)
+								dd = "星期五";
+							else
+								dd = "星期六";
+
+							// cudate = year+"年"+month+"月"+day+"日  "+dd+"  " + hour +" ： " +minute+" ： " +second ; // 时间显示格式待优化: 13 ： 2 ： 58
+							cudate = year + "年" + month + "月" + day + "日  " + dd + "  ";
+							document.write(cudate);
+							//
+							-->
+						</script>
+					</span>
+				</div>
+				<p align="center" class="toplink"> <a href="http://sgs.mca.gov.cn/article/phone/" target="_blank"
+						class="icon1"></a><a href="http://sgs.mca.gov.cn/article/mtjz/web/" target="_blank"
+						class="icon5"></a>
+					<!--a href="http://sgs.mca.gov.cn/article/mzwywx/" target="_blank" class="icon2"></a> <a href="http://weibo.com/p/1001062565811051/home?from=page_100106&mod=TAB&is_all=1#place" target="_blank" class="icon3"></a-->
+				</p>
+			</div>
+		</div>
+		<div align="center">
+			<p align="center">
+				<!--时间 和顶部链接 end  -->
+
+				<!--
+				                <script>
+									alert("说明：本预测模型仅供参考，不作为医疗诊断结论！");
+				         		 </script>
+							
+							
+								<script language="javascript"> //js脚本标注
+										confirm("注意： 1. 本工具为预测工具，不能用于已患慢性阻塞性肺疾病的患者的自我评估！\n2. 本工具不能用于医疗诊断用途！"); //在页面上弹出确认对话框
+								</script>
+							
+
+							<script>
+								document.getElementById("box").style.fontSize = "60px";
+							
+							</script>
+							-->
+			<div align="center">
+				<span class="STYLE10">冠心病介入术后核心症状发生风险预测模型</span></p>
+				<p align="center">&nbsp;</p>
+				<p class="STYLE14 STYLE23" id="box"> 使用说明：</p>
+				<p class="STYLE14 STYLE23">1. 本工具为预测工具，不能用于患者的自我评估！</p>
+				<p class="STYLE14 STYLE23"> 2. 本工具不用于医疗诊断用途！ </p>
+				<canvas id="canvas"></canvas>
+
+				<script type="text/javascript">
+					/**
+					 * 定义<canvas>画布;
+					 * @type {[type]}
+					 */
+					var width = window.innerWidth; //获取系统显示宽度;
+					var height = window.innerHeight; //获取系统显示高度;
+					var canvas = document.querySelector("#canvas");
+					var context = canvas.getContext("2d");
+					var snowArray = []; //声明一个数组，用于存放创建出来的雪花对象；
+
+					canvas.width = width; //设置画布的宽度为系统显示宽度;
+					canvas.height = height / 10; //设置画布的高度为系统显示高度;
+
+					cartoon(); //调用动画;
+
+					/**
+					 * 定义雪花类;
+					 */
+					class Snowflake {
+						constructor() {
+							this.init(); //构造函数，调用定义好的init()方法;
+						}
+						init() {
+							this.position = { //雪花对象的位置;
+								x: Math.random() * width, //x坐标随机;
+								y: Math.random() * height, //y坐标随机;
+							}
+							this.speed = Math.random() * 10; //雪花下落速度为0-10以内的随机数;
+							this.r = Math.random() * 6; //雪花的半径为0-6以内的随机数;
+							this.transparency = Math.random(); //设置雪花的透明度为随机;
+							this.color = {
+								r1: Math.random() * 255, //雪花颜色随机;
+								g: Math.random() * 255,
+								b: Math.random() * 255,
+							}
+						}
+						draw() { //雪花绘制方法;
+							this.position.y++; //y坐标每次递增1像素;
+							this.transparency -= 0.01; //透明度每次递减0.01;
+							if (this.transparency <= 0) { //透明度小于0，即雪花消失，重新绘制雪花;
+								this.init();
+							}
+							context.beginPath(); //开始一个新的图形绘制;
+							context.fillStyle = "rgba(" + this.color.r1 + "," + this.color.g + "," + this.color.b + "," + this
+								.transparency + ")"; //根据类模型绘制圆形雪花;
+							context.arc(this.position.x, this.position.y, this.r, 0, Math.PI * 2); //填充雪花的颜色;
+							context.fill();
+						}
+					}
+
+					for (var i = 0; i < 1000; i++) {
+						var snow = new Snowflake(); //实例化1000个雪花对象;
+						snowArray.push(snow); //将雪花对象添加到数组中;
+					}
+					// var length=snowArray.length;
+
+					/**
+					 * 定义动画效果;
+					 * @return {[type]} [description]
+					 */
+					function cartoon() {
+						context.clearRect(0, 0, width, height); //动画完成一次进行清屏操作;
+						for (var j = 0; j < snowArray.length; j++) {
+							snowArray[j].draw(); //将实例化好的每个雪花对象在画布上画出来;
+						}
+						requestAnimationFrame(cartoon); //递归调用动画效果;
+					}
+				</script>
+
+				<hr align="center" />
+			</div>
+
+			<div align="center">
+				<table width="1080" border="1" cellpadding="10" bordercolor="#0099CC">
+
+					<tr>
+						<td height="71" colspan="6" nowrap bgcolor="#99FFFF">
+							<div align="center"><span class="STYLE4 ">冠心病介入术后核心症状发生风险预测</span></div>
+						</td>
+					</tr>
+
+					<form id="formtest" name="formtest" method="post" action="/COPDpredictor/COPD_V3_2021_html.php">
+						<tr>
+							<td width="194" height="65"><span class="STYLE24">1. 性别</span></td>
+							<td colspan="5">
+								<span class="STYLE23">
+									<!-- <form id="form1" name="form1" method="post" action="">  -->
+									<label>
+										<input type="radio" name="radio_sex" value="1" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8" />
+										<span class="STYLE11">男</span></label>
+									<span class="STYLE11">
+										<label>
+											<input type="radio" name="radio_sex" value="2" method="post"
+												action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8" />
+											女</label>
+									</span></span>
+							</td>
+						</tr>
+
+						<tr>
+							<td width="194" height="65"><span class="STYLE24">2. 年龄</span></td>
+							<td colspan="5">
+								<span class="STYLE23">
+									<label>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span></label>
+									<span class="STYLE11">岁) </span></span>
+							</td>
+						</tr>
+						<tr>
+							<td width="194" height="65" nowrap bordercolor="#006699"><span class="STYLE24">3.
+									教育程度</span></td>
+							<td colspan="5" nowrap>
+								<span class="STYLE23">
+									<label>
+										<input type="radio" name="radio_education" value="1" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8" />
+										<span class="STYLE11">小学及以下</span></label>
+									<span class="STYLE11">
+										<label>
+											<input type="radio" name="radio_education" value="2" method="post"
+												action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8" />
+											初中/高中</label>
+										<label>
+											<input type="radio" name="radio_education" value="3" method="post"
+												action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8" />
+											大学及以上</label>
+									</span></span>
+							</td>
+						</tr>
+						<tr>
+							<td width="194" height="81" rowspan="2" nowrap><span class="STYLE24">4. 体质指数（BMI）</span>
+							</td>
+							<td width="219" rowspan="2" nowrap>
+								<span class="STYLE25">
+									<label>身高
+										<input type="text" id="height" name="heightInput" value="" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+									</label>
+									(厘米) </span>
+							</td>
+							<td width="277" rowspan="2" nowrap>
+								<span class="STYLE25">
+									<label>体重</label>
+									<label>
+										<input id="weight" name="weightInput" type="text" value="" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										(</label><label>千克或公斤) </label>
+								</span>
+							</td>
+
+
+
+							<!--     
+					     <td width="111" rowspan="2" nowrap bgcolor="#FFFFFF"><!-- <p><em data-bm="31">体质指数(<em>BMI</em>) = 体重(<em>kg</em>)÷身高^2(<em>m</em>)</em></p  >  
+					     	   </td> --->
+							<td colspan="2" align="center" nowrap bgcolor="#FFFFFF">
+								<button type="button" onClick="DisplayBMI_fatLevel()"
+									style="width:224; height:30px; font:华光小标宋_CNKI;font-size:20px; color:#0000FF"
+									accept-charset="utf-8">
+									<div align="center"><span class="STYLE26">计算体质指数(BMI)</span></div>
+								</button>
+							</td>
+						</tr>
+
+						<tr>
+							<td width="186" nowrap bgcolor="#FFFFFF" border="0">
+								<div id="BMI" style="height:23px;font-size:24px;" size="3" align="center"><span
+										class="STYLE23"><span class="STYLE23"></span></span> </div>
+							</td>
+							<td width="80" nowrap bgcolor="#FFFFFF" border="0">
+								<div id="fatLevel" style="height:23px;font-size:24px;" size="3" align="center"><span
+										class="STYLE23"><span class="STYLE23"></span></span> </div>
+							</td>
+							<script>
+								function DisplayBMI_fatLevel() {
+									var height = $("#height").val();
+									height = height * 0.01;
+									var weight = $("#weight").val();
+									var BMIvalue = weight / (height * height);
+									BMIvalue = BMIvalue.toFixed(2);
+									var fatLeverValue = ""; //"请输入身高体重";
+
+									//  注释为中国参考标准。 分为3类是课题组的设计。
+									if (BMIvalue < 18.5)
+										// document.write(cudate);
+										fatLeverValue = "偏瘦";
+									else if (BMIvalue >= 18.5 && BMIvalue < 23.9)
+										fatLeverValue = "正常";
+									else if (BMIvalue >= 23.9 && BMIvalue < 26.9)
+										fatLeverValue = "超重"; // 偏胖
+									else if (BMIvalue >= 26.9 && BMIvalue < 29.9)
+										fatLeverValue = "超重"; // 肥胖						  
+									else if (BMIvalue >= 29.9)
+										fatLeverValue = "超重"; // 重度肥胖
+
+									//document.getElementById("BMI").innerHTML  = "体质指数(BMI): "+ Math.round(BMIvalue*Math.pow(10,3))/Math.pow(10,3);;
+									//document.getElementById("BMI").innerHTML  =  Math.round(BMIvalue*Math.pow(10,3))/Math.pow(10,3);
+									document.getElementById("BMI").innerHTML = Math.round(BMIvalue * Math.pow(10, 3)) / Math.pow(10, 3) +
+										"千克/平方米";
+									document.getElementById("fatLevel").innerHTML = fatLeverValue; //  肥胖程度
+								}
+							</script>
+						</tr>
+
+						<tr>
+							<td width="194" rowspan="3" nowrap><span class="STYLE24">5. 吸烟</span> </td>
+							<td height="45" colspan="5" nowrap><span class="STYLE23">
+									<input type="radio" name="radio_smoke" id="neverSmoke" value="1" method="post"
+										action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+										onClick="DisplayBMI_fatLevel()" />
+									<span class="STYLE11">从不吸烟</span></span></td>
+						</tr>
+						<tr>
+							<td height="45" colspan="5" nowrap><span class="STYLE23">
+									<input type="radio" name="radio_smoke" id="NowSmoke" value="2" method="post"
+										action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+										onClick="DisplayBMI_fatLevel()" />
+									<span class="STYLE11">目前吸烟：
+										<label>每日吸烟 </label>
+										<label>
+											<input type="text" name="DailySmokeNumber2" id="DailySmokeNumber2" value="0"
+												method="post" action="/COPDpredictor/COPD_V3_2021_html.php"
+												accept-charset="utf-8" style="height:25px;font-size:26px;display:none;"
+												size="3" />
+										</label>
+										<label>(支)、吸烟
+
+											<input type="text" name="SmokeYearNumber2" id="SmokeYearNumber2" value="0"
+												maxlength="2" method="post"
+												action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+												style="height:25px;font-size:26px;display:none;" size="3" />
+											(年) </label>
+										<label>
+											<!-- 
+						  包年=（每日吸烟支数/20）*吸烟年限 
+						  <input list="browsers" name="browser" id="browser">
+									  <ul>
+										  <li>0~5支</li>
+										  <li>6~15支</li>
+										  <li>16~20支</li>
+										  <li>21~30支</li>
+										  <li>大于30支</li>
+									  </ul>
+									 -->
+										</label>
+										<label></label>
+										<label> </label>
+										<label></label>
+									</span></span><span class="STYLE25">
+									<label></label>
+
+									<label></label>
+								</span></td>
+						</tr>
+						<tr>
+							<td height="45" colspan="5" nowrap>
+								<span class="STYLE25">
+									<!--  <form id="form3" name="form3" method="post" action="">   -->
+									<label></label>
+									<label>
+										<input type="radio" name="radio_smoke" id="EverSmoke" value="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											onClick="DisplayBMI_fatLevel()" />
+										已戒烟 </label>
+									：
+									<label>戒烟前每日吸烟 </label>
+									<label>
+										<input type="text" name="DailySmokeNumber" id="DailySmokeNumber" value="0"
+											method="post" action="/COPDpredictor/COPD_V3_2021_html.php"
+											accept-charset="utf-8" style="height:25px;font-size:26px;display:none;"
+											size="3" />
+										(</label>
+									<label>支)、吸烟
+
+										<input type="text" name="SmokeYearNumber" id="SmokeYearNumber" value="0"
+											maxlength="2" method="post" action="/COPDpredictor/COPD_V3_2021_html.php"
+											accept-charset="utf-8" style="height:25px;font-size:26px;display:none;"
+											size="3" />
+										(年) </label>
+									<label>
+										<!-- 
+						  包年=（每日吸烟支数/20）*吸烟年限 
+						  <input list="browsers" name="browser" id="browser">
+									  <ul>
+										  <li>0~5支</li>
+										  <li>6~15支</li>
+										  <li>16~20支</li>
+										  <li>21~30支</li>
+										  <li>大于30支</li>
+									  </ul>
+									 -->
+									</label>
+									<label></label>
+									<label> </label>
+									<label></label>
+								</span>
+								<span class="STYLE25">
+									<!-- <form id="form4" name="form4" method="post" action=""> 
+					   <input id="weight"  name = "weightInput"  type="text"  value=""  method="post"  action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"  />
+					  -->
+									<label></label>
+								</span>
+								<span class="STYLE25">
+									<!--  <form id="form18" name="form18" method="post" action="">   -->
+									<label></label>
+								</span>
+							</td>
+						</tr>
+
+
+						<script type="text/javascript">
+							$('input:radio[name="radio_smoke"]').change(function() {
+								if ($("#neverSmoke").is(":checked")) {
+									$("#DailySmokeNumber2").hide();
+									$("#SmokeYearNumber2").hide();
+									$("#DailySmokeNumber").hide();
+									$("#SmokeYearNumber").hide();
+								}
+								if ($("#NowSmoke").is(":checked")) {
+									$("#DailySmokeNumber2").show();
+									$("#SmokeYearNumber2").show();
+									$("#DailySmokeNumber").hide();
+									$("#SmokeYearNumber").hide();
+								}
+								if ($("#EverSmoke").is(":checked")) {
+									$("#DailySmokeNumber").show();
+									$("#SmokeYearNumber").show();
+									$("#DailySmokeNumber2").hide();
+									$("#SmokeYearNumber2").hide();
+								}
+							})
+						</script>
+
+
+
+
+						<tr>
+							<td width="194" height="65" nowrap>
+								<span class="STYLE24">6.家族遗传史</span>
+							</td>
+							<td colspan="5"> <span class="STYLE23">
+									<!-- <form id="formtest" name="formtest" method="post" action="#"> -->
+									<label>
+										<!--  <input type="radio"  name="radio_parent" value="no"  action="/COPDpredictor/COPD_V3_2021_html.php"   onsubmit=" return parentN();">   -->
+										<input type="radio" name="radio_parent" value="1" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8" />
+										<span class="STYLE11"> 无</span></label>
+									<span class="STYLE11">
+										<label>
+											<!--  <input type="radio" name="radio_parent" value="yes" action="/COPDpredictor/COPD_V3_2021_html.php" onsubmit="return parentY();"   checked="checked" />    -->
+											<input type="radio" name="radio_parent" value="2" method="post"
+												action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8" />
+											有</label>
+									</span></span><span class="STYLE25">
+									<label></label>
+								</span>
+								<span class="STYLE23">
+									<label></label>
+								</span>
+							</td>
+						</tr>
+
+
+
+						<script type="text/javascript">
+							function parentN() {
+								//formtest.action="/COPDpredictor/COPD_V3_2021_html.php"; 
+								//formtest.submit();
+								$("#formtest").ajaxSubmit(function(message) {
+									// 对于表单提交成功后处理，message为提交页面saveReport.htm的返回内容 
+								});
+
+								return false;
+							}
+
+							function parentY() {
+								//formtest.action="/COPDpredictor/COPD_V3_2021_html.php"; 
+								//formtest.submit();
+								$("#formtest").ajaxSubmit(function(message) {
+									// 对于表单提交成功后处理，message为提交页面saveReport.htm的返回内容 
+								});
+								return false;
+							}
+						</script>
+
+
+
+
+						<tr>
+							<td width="194" height="65" nowrap>
+								<span class="STYLE24">7.冠状动脉病变类型</span>
+							</td>
+							<td colspan="5"> <span class="STYLE23">
+									<!-- <form id="formtest" name="formtest" method="post" action="#"> -->
+									<label>
+										<!--  <input type="radio"  name="radio_parent" value="no"  action="/COPDpredictor/COPD_V3_2021_html.php"   onsubmit=" return parentN();">   -->
+										<input type="radio" name="radio_parent" value="1" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8" />
+										<span class="STYLE11"> 单支病变</span></label>
+									<span class="STYLE11">
+										<label>
+											<!--  <input type="radio" name="radio_parent" value="yes" action="/COPDpredictor/COPD_V3_2021_html.php" onsubmit="return parentY();"   checked="checked" />    -->
+											<input type="radio" name="radio_parent" value="2" method="post"
+												action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8" />
+											多支病变</label>
+									</span></span><span class="STYLE25">
+									<label></label>
+								</span>
+								<span class="STYLE23">
+									<label></label>
+								</span>
+							</td>
+						</tr>
+
+						<tr>
+							<td width="194" height="65"><span class="STYLE24">8.冠心病介入治疗次数</span></td>
+							<td colspan="5">
+								<span class="STYLE23">
+									<label>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span></label>
+									<span class="STYLE11">次) </span></span>
+							</td>
+						</tr>
+
+						<tr>
+							<td width="194" height="65"><span class="STYLE24">9.支架植入数量</span></td>
+							<td colspan="5">
+								<span class="STYLE23">
+									<label>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span></label>
+									<span class="STYLE11">次) </span></span>
+							</td>
+						</tr>
+
+
+
+
+
+						<tr>
+							<td width="194" height="65"><span class="STYLE24">10.心脏症状</span></td>
+							<td colspan="5">
+
+							</td>
+						</tr>
+
+
+
+
+					</form>
+				</table>
+
+
+
+				<table width="1080" border="1" cellpadding="10" bordercolor="#0099CC">
+
+
+
+					<form id="formtest" name="formtest" method="post" action="/COPDpredictor/COPD_V3_2021_html.php">
+						<tr>
+							<td width="294" height="65"><span class="STYLE24">(1)最近7天有胸痛吗？</span></td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">发生频率(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">严重程度(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="294" height="65"><span class="STYLE24">(2)最近7天有呼吸困难吗？</span></td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">发生频率(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">严重程度(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="294" height="65"><span class="STYLE24">(3)最近7天有感觉疲劳/困倦吗？</span></td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">发生频率(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">严重程度(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="294" height="65"><span class="STYLE24">(4)最近7天有感觉沮丧/忧郁吗？</span></td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">发生频率(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">严重程度(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="294" height="65"><span class="STYLE24">(5)最近7天有睡眠障碍吗？</span></td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">发生频率(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">严重程度(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="294" height="65"><span class="STYLE24">(6)最近7天有与手术有关的疼痛不适吗？</span></td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">发生频率(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">严重程度(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="294" height="65"><span class="STYLE24">(7)最近7天有腿肿吗？</span></td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">发生频率(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">严重程度(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="294" height="65"><span class="STYLE24">(8)最近7天有心悸吗？</span></td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">发生频率(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">严重程度(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="294" height="65"><span class="STYLE24">(9)最近7天有感觉焦虑/有压力吗？</span></td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">发生频率(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">严重程度(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="294" height="65"><span class="STYLE24">(10)最近7天有食欲不佳吗？</span></td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">发生频率(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+							<td colspan="1">
+								<span class="STYLE23">
+									<label>
+										<span class="STYLE11">严重程度(0-10</span><span class="STYLE11">分) </span>
+										<input name="age" type="text" value="" maxlength="3" method="post"
+											action="/COPDpredictor/COPD_V3_2021_html.php" accept-charset="utf-8"
+											style="height:25px;font-size:26px;" size="3" />
+										<span class="STYLE11">(</span><span class="STYLE11">分) </span>
+									</label>
+
+								</span>
+							</td>
+						</tr>
+						
+						<tr>
+							<td height="79" colspan="6" bgcolor="#33FFFF">
+						
+						
+								<input name="RiskScore" type="submit" value="风险预测" align="right" size="28"
+									style="width:249; height:60px; font:华光小标宋_CNKI;font-size:24px; color:#0000FF; background-color:red"
+									accept-charset="utf-8" />
+						
+						
+								<button type = "button"  class="STYLE3 STYLE7" id="myButton" >   查看预测结果	</button>					    
+							</td>
+						</tr>
+
+
+					</form>
+				</table>
+
+
+				<p>&nbsp;</p>
+
+				<!--
+		                    <form name='formReturn' method='post' action='/COPDpredictor/COPD_V1_2021.html'   accept-charset='utf-8' >
+					          <p>
+					           
+					            
+	                          </p>
+					          <button class="button1 "  align="center" >重新填写</button>
+							</form>-->
+			</div>
+
+			<hr>
+			<div align="center" style="background-image: url('https://www.ahtcm.edu.cn/images/nyban.jpg'); width: auto; height: 390px; background-size: cover; >
+				
+				<p align=" center" class="STYLE27">研发团队:安徽中医药大学</p>
+				<p align="center" class="STYLE27">地址:安徽省合肥市梅山路 | 邮编：100005</p>
+				<p align="center" class="STYLE27">联系邮箱:maogubao@88.com</p>
+
+
+			</div>
+
+
+
+			<!--  <script src="/COPDpredictor/main.js" type="module"></script> 
+						  Global site tag (gtag.js) - Google Analytics-->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145431339-1"></script>
+			<script>
+				window.dataLayer = window.dataLayer || [];
+
+				function gtag() {
+					dataLayer.push(arguments);
+				}
+				gtag('js', new Date());
+
+				gtag('config', 'UA-145431339-1');
+			</script>
+			
+			
+			<script>
+			// JavaScript 代码段开始
+			document.addEventListener("DOMContentLoaded", function() {
+			    // 获取按钮元素
+			    var button = document.getElementById("myButton");
+			    // 为按钮添加点击事件监听器
+			    button.addEventListener("click", function() {
+			        alert("我还没被开发呢");
+			    });
+			});
+			// JavaScript 代码段结束
+			</script>
+			
+	</body>
+</html>
